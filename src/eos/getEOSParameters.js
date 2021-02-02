@@ -1,4 +1,4 @@
-const R = 8.314e-5;
+import { R } from '../data/constants.js';
 
 export function getVDWParameters(molecularFluid) {
   const parameters = {
@@ -14,7 +14,7 @@ export function getVDWParameters(molecularFluid) {
   return parameters;
 }
 
-export function geRKParameters(molecularFluid, temperature) {
+export function getRKParameters(molecularFluid, temperature) {
   const parameters = {
     a:
       (0.42748 * R ** 2 * molecularFluid.criticalTemperature ** 2) /
@@ -31,7 +31,7 @@ export function geRKParameters(molecularFluid, temperature) {
   return parameters;
 }
 
-export function geRKSParameters(molecularFluid, temperature) {
+export function getRKSParameters(molecularFluid, temperature) {
   const s =
     0.48 +
     1.574 * molecularFluid.accentricFactor -
@@ -55,7 +55,7 @@ export function geRKSParameters(molecularFluid, temperature) {
   return parameters;
 }
 
-export function gePRparameters(molecularFluid, temperature) {
+export function getPRParameters(molecularFluid, temperature) {
   const s =
     0.37464 +
     1.54226 * molecularFluid.accentricFactor -

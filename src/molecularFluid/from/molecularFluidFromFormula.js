@@ -1,5 +1,6 @@
-import { MolecularFluid } from '../molecularFluid.js';
 import moleculeProperties from '../../data/molecules.json';
+import { MolecularFluid } from '../molecularFluid.js';
+
 import { handleError } from './handleError.js';
 
 export function molecularFluidFromFormula(molFormula) {

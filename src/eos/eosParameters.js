@@ -1,11 +1,11 @@
 import {
   getVDWParameters,
-  getPRparameters,
+  getPRParameters,
   getRKParameters,
   getRKSParameters,
 } from './getEOSParameters.js';
 
-class EOS {
+export class EOSParameters {
   constructor(molecularFluid, options = {}) {
     let { temperature = 298, eos = 'pr' } = options;
     this.eos = eos;
@@ -20,12 +20,12 @@ class EOS {
     this.Delta = null;
     let parameters;
 
-    switch (eos.lowerCase) {
+    switch (eos) {
       case 'vdw':
         parameters = getVDWParameters(molecularFluid);
         break;
       case 'pr':
-        parameters = getPRparameters(molecularFluid, temperature);
+        parameters = getPRParameters(molecularFluid, temperature);
         break;
       case 'rk':
         parameters = getRKParameters(molecularFluid, temperature);

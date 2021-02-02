@@ -1,6 +1,6 @@
+import { molecularFluidFromFormula } from './from/molecularFluidFromFormula.js';
 import { molecularFluidFromName } from './from/molecularFluidFromName.js';
 
-import { molecularFluidFromFormula } from './from/molecularFluidFromFormula.js';
 export class MolecularFluid {
   constructor(
     molarMass,
