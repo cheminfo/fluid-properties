@@ -1,6 +1,7 @@
 import { R } from '../data/constants.js';
 
 import { EOSParameters } from './eosParameters';
+import { getPhasefromPhi } from './phase.js';
 
 export function getEOS(molecularFluid, temperature, options = {}) {
   let { pressure = 1, volume = null, eos = 'pr' } = options;
@@ -10,11 +11,36 @@ export function getEOS(molecularFluid, temperature, options = {}) {
     eos: eos,
   });
 
+  eosParameters.relativeTemperature =
+    temperature / molecularFluid.criticalTemperature;
+
   if (Number.isFinite(volume) & !Number.isFinite(pressure)) {
     pressure = getPressure(eosParameters, temperature, volume);
   }
 
   updateEOSParameters(eosParameters, pressure, temperature);
+
+  let zList = solveZ(eosParameters);
+  let phaseProperties = getThermodynamicProperties(
+    zList,
+    eosParameters,
+    eos,
+    molecularFluid,
+    pressure,
+    temperature,
+  );
+  let phis = [];
+  phaseProperties.foreach((properties) => {
+    phis.push(properties.fugacityCoefficient);
+  });
+
+  return {
+    temperature: temperature,
+    pressure: pressure,
+    phaseProperties: phaseProperties,
+    zList: zList,
+    inPhase: getPhasefromPhi(phis),
+  };
 }
 
 function validateInput(volume, pressure) {
@@ -63,22 +89,24 @@ function updateEOSParameters(eosParameters, pressure, temperature) {
 }
 
 /**
- *https://pubs.acs.org/doi/pdf/10.1021/ie2023004
+ *Some background here https://pubs.acs.org/doi/pdf/10.1021/ie2023004
  *
  */
 function solveZ(eosParameters) {
   // Cardano solution formula
-
+  let zList = [];
   if (eosParameters.Delta > 0) {
-    let zList = solveCardano(eosParameters);
+    zList = solveCardano(eosParameters);
   } else {
-    let zList = solveTrigonometric(eosParameters);
+    zList = solveTrigonometric(eosParameters);
   }
+
+  return zList;
 }
 
 function solveCardano(eosParameters) {
   let xSol;
-  let zList;
+  let zList = [];
   xSol =
     Math.cbrt(-eosParameters.q / 2 + Math.sqrt(eosParameters.Delta)) +
     Math.cbrt(-eosParameters.q / 2 - Math.sqrt(eosParameters.Delta));
@@ -88,9 +116,95 @@ function solveCardano(eosParameters) {
 
 function solveTrigonometric(eosParameters) {
   let xSol;
-  let zList;
+  let zList = [];
 
+  let subeq = Math.arccos(
+    ((3 * eosParameters.q) / 2 / eosParameters.p) *
+      Math.sqrt(-3 / eosParameters.p),
+  );
+  for (let offset = 0; offset < 3; offset += 1) {
+    xSol =
+      2 *
+      Math.sqrt(-eosParameters.p / 3) *
+      Math.cos(subeq / 3 - (2 * Math.pi * offset) / 3);
+    zList.push(xSol - eosParameters.alpha / 3);
+  }
+  zList.sort(); // [ z_liq, z_meaningless, z_vap ]
+  zList.pop(1); // remove meaningless central value
   return zList;
 }
 
-function getThermodynamicProperties(zList, eosParameters) {}
+function getThermodynamicProperties(
+  zList,
+  eosParameters,
+  eos,
+  molecularFluid,
+  pressure,
+  temperature,
+) {
+  let phaseProperties = [];
+  switch (eos) {
+    case 'pr':
+      return zList.foreach((z) => {
+        phaseProperties.push(
+          getThermodynamicPropertiesPR(
+            z,
+            eosParameters,
+            molecularFluid,
+            pressure,
+            temperature,
+          ),
+        );
+      });
+    default:
+      throw new Error('Only supported EOS are VDW and PR.');
+  }
+}
+
+function getThermodynamicPropertiesPR(
+  z,
+  eosParameters,
+  molecularFluid,
+  pressure,
+  temperature,
+) {
+  const ecap = eosParameters.S * Math.sqrt(eosParameters.tr / eosParameters.k);
+  const subeq1 = eosParameters.A / 2 / Math.sqrt(2) / eosParameters.B;
+
+  const subeq2 = Math.log(
+    (z + eosParameters.B * (1 + Math.sqrt(2))) /
+      (z + eosParameters.B * (1 - Math.sqrt(2))),
+  );
+  const residualEnthalpy = z - 1 - subeq1 * (1 + ecap) * subeq2;
+  const residualEntropy =
+    Math.log(z - eosParameters.B) - subeq1 * ecap * subeq2;
+
+  const { gibbs, fugacity } = computeGibbsFugacity(
+    residualEnthalpy,
+    residualEntropy,
+  );
+  const molarDensity = computeMolarDensity(pressure, temperature, z);
+  return {
+    fugacityCoefficient: fugacity,
+    residualEnthalpy: residualEnthalpy,
+    residualEntropy: residualEntropy,
+    residualGibbsEnergy: gibbs,
+    compressibilityFactor: z,
+    molarDensity: molarDensity,
+    density: computeDensity(molarDensity, molecularFluid),
+  };
+}
+
+function computeGibbsFugacity(enthalpy, entropy) {
+  const gibbs = enthalpy - entropy;
+  const fugacityCoefficient = Math.exp(gibbs);
+  return { gibbs, fugacityCoefficient };
+}
+
+function computeMolarDensity(pressure, temperature, compressibilityFactor) {
+  return pressure / (R * 1000 * temperature * compressibilityFactor);
+}
+
+function computeDensity(molarDensity, molecularFluid) {
+  return (molarDensity * molecularFluid.molecularMass) / 1000;
+}
