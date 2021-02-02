@@ -117,15 +117,16 @@ function solveTrigonometric(eosParameters) {
   let xSol;
   let zList = [];
 
-  let subeq = Math.arccos(
+  let subeq = Math.acos(
     ((3 * eosParameters.q) / 2 / eosParameters.p) *
       Math.sqrt(-3 / eosParameters.p),
   );
-  for (let offset = 0; offset < 3; offset += 1) {
+
+  for (let offset = 0; offset < 3; offset++) {
     xSol =
       2 *
       Math.sqrt(-eosParameters.p / 3) *
-      Math.cos(subeq / 3 - (2 * Math.pi * offset) / 3);
+      Math.cos(subeq / 3 - (2 * Math.PI * offset) / 3);
     zList.push(xSol - eosParameters.alpha / 3);
   }
   zList.sort(); // [ z_liq, z_meaningless, z_vap ]

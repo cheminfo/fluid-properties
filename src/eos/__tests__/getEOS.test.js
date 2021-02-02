@@ -19,3 +19,9 @@ test('methane', () => {
   expect(res.zList).toHaveLength(1);
   expect(res.phaseProperties[0].fugacityCoefficient).toBeCloseTo(0.8026, 2);
 });
+
+test('methane close to saturation', () => {
+  const methane = MolecularFluid.fromName('methane');
+  let res = getEOS(methane, 92.15, { pressure: 2.20178 });
+  expect(res.zList).toHaveLength(2);
+});
