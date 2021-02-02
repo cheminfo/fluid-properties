@@ -33,4 +33,5 @@ test('hexane', () => {
   expect(res.zList).toHaveLength(2);
   expect(res.zList[0]).toBeCloseTo(0.002);
   expect(res.zList[1]).toBeCloseTo(0.97);
+  // We're slightly off in zs and the derived properties we should double check where this stems from
 });
