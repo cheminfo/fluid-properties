@@ -1,8 +1,14 @@
 import { molecularFluidFromName } from './from/molecularFluidFromName.js';
 
-class MolecularFluid {
-  constructor(mass, criticalTemperature, criticalPressure, accentricFactor) {
-    this.mass = mass;
+import { molecularFluidFromFormula } from './from/molecularFluidFromFormula.js';
+export class MolecularFluid {
+  constructor(
+    molarMass,
+    criticalTemperature,
+    criticalPressure,
+    accentricFactor,
+  ) {
+    this.molarMass = molarMass;
     this.criticalTemperature = criticalTemperature;
     this.criticalPressure = criticalPressure;
     this.accentricFactor = accentricFactor;
@@ -10,3 +16,4 @@ class MolecularFluid {
 }
 
 MolecularFluid.fromName = molecularFluidFromName;
+MolecularFluid.fromFormula = molecularFluidFromFormula;
