@@ -73,8 +73,8 @@ export function getPRParameters(molecularFluid, temperature) {
         s *
           (1 - Math.sqrt(temperature / molecularFluid.criticalTemperature))) **
       2,
-    u: 1,
-    w: 0,
+    u: 2,
+    w: -1,
   };
   return parameters;
 }

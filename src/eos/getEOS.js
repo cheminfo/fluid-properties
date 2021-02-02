@@ -30,7 +30,7 @@ export function getEOS(molecularFluid, temperature, options = {}) {
     temperature,
   );
   let phis = [];
-  phaseProperties.foreach((properties) => {
+  phaseProperties.forEach((properties) => {
     phis.push(properties.fugacityCoefficient);
   });
 
@@ -100,7 +100,6 @@ function solveZ(eosParameters) {
   } else {
     zList = solveTrigonometric(eosParameters);
   }
-
   return zList;
 }
 
@@ -145,7 +144,7 @@ function getThermodynamicProperties(
   let phaseProperties = [];
   switch (eos) {
     case 'pr':
-      return zList.foreach((z) => {
+      zList.forEach((z) => {
         phaseProperties.push(
           getThermodynamicPropertiesPR(
             z,
@@ -156,9 +155,11 @@ function getThermodynamicProperties(
           ),
         );
       });
+      break;
     default:
       throw new Error('Only supported EOS are VDW and PR.');
   }
+  return phaseProperties;
 }
 
 function getThermodynamicPropertiesPR(
@@ -168,7 +169,9 @@ function getThermodynamicPropertiesPR(
   pressure,
   temperature,
 ) {
-  const ecap = eosParameters.S * Math.sqrt(eosParameters.tr / eosParameters.k);
+  const ecap =
+    eosParameters.S *
+    Math.sqrt(eosParameters.relativeTemperature / eosParameters.k);
   const subeq1 = eosParameters.A / 2 / Math.sqrt(2) / eosParameters.B;
 
   const subeq2 = Math.log(
@@ -179,13 +182,14 @@ function getThermodynamicPropertiesPR(
   const residualEntropy =
     Math.log(z - eosParameters.B) - subeq1 * ecap * subeq2;
 
-  const { gibbs, fugacity } = computeGibbsFugacity(
+  const { gibbs, fugacityCoefficient } = computeGibbsFugacity(
     residualEnthalpy,
     residualEntropy,
   );
   const molarDensity = computeMolarDensity(pressure, temperature, z);
   return {
-    fugacityCoefficient: fugacity,
+    fugacityCoefficient: fugacityCoefficient,
+    fugacity: fugacityCoefficient * pressure,
     residualEnthalpy: residualEnthalpy,
     residualEntropy: residualEntropy,
     residualGibbsEnergy: gibbs,
@@ -206,5 +210,5 @@ function computeMolarDensity(pressure, temperature, compressibilityFactor) {
 }
 
 function computeDensity(molarDensity, molecularFluid) {
-  return (molarDensity * molecularFluid.molecularMass) / 1000;
+  return (molarDensity * molecularFluid.molarMass) / 1000;
 }

@@ -39,7 +39,7 @@ export class EOSParameters {
 
     this.a = parameters.a;
     this.b = parameters.b;
-    this.S = parameters.s;
+    this.S = parameters.S;
     this.k = parameters.k;
     this.u = parameters.u;
     this.w = parameters.w;

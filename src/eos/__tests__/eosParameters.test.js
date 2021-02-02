@@ -6,4 +6,5 @@ test('constructing EOS object', () => {
   let eos = new EOSParameters(methane);
   expect(eos.w).toStrictEqual(0);
   expect(eos.u).toStrictEqual(1);
+  expect(eos.S).toBeGreaterThan(0);
 });

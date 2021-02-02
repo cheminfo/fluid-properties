@@ -5,7 +5,7 @@
 [![Test coverage][codecov-image]][codecov-url]
 [![npm download][download-image]][download-url]
 
-Calculate thermodynamic properties of molecular fluids. Inspired by [Daniele Ongari's package](https://github.com/danieleongari/mol-tdn)
+Calculate thermodynamic properties of molecular fluids. Translation of [Daniele Ongari's package](https://github.com/danieleongari/mol-tdn)
 
 ## Installation
 
