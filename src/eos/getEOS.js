@@ -130,7 +130,8 @@ function solveTrigonometric(eosParameters) {
     zList.push(xSol - eosParameters.alpha / 3);
   }
   zList.sort(); // [ z_liq, z_meaningless, z_vap ]
-  zList.pop(1); // remove meaningless central value
+  //remove the meaningless value
+  zList.splice(1, 1);
   return zList;
 }
 

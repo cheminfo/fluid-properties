@@ -25,3 +25,12 @@ test('methane close to saturation', () => {
   let res = getEOS(methane, 92.15, { pressure: 2.20178 });
   expect(res.zList).toHaveLength(2);
 });
+
+test('hexane', () => {
+  // Comparing with the spreadsheet accompanying Introductory Chemical Engineering Thermodynamics, 2nd Edition by J. Richard Elliott, Carl T. Lira
+  const hexane = MolecularFluid.fromName('hexane');
+  let res = getEOS(hexane, 322.29, { pressure: 0.5 });
+  expect(res.zList).toHaveLength(2);
+  expect(res.zList[0]).toBeCloseTo(0.002);
+  expect(res.zList[1]).toBeCloseTo(0.97);
+});
