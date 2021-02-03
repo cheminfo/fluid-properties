@@ -1,5 +1,5 @@
 {
-  "name": "fluid_properties",
+  "name": "fluid-properties",
   "version": "0.0.0",
   "description": "Calculate thermodynamic properties of molecular fluids",
   "main": "lib/index.js",
@@ -18,15 +18,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cheminfo/fluid_properties.git"
+    "url": "git+https://github.com/cheminfo/fluid-properties.git"
   },
   "keywords": [],
   "author": "Kevin M. Jablonka",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cheminfo/fluid_properties/issues"
+    "url": "https://github.com/cheminfo/fluid-properties/issues"
   },
-  "homepage": "https://github.com/cheminfo/fluid_properties#readme",
+  "homepage": "https://github.com/cheminfo/fluid-properties#readme",
   "jest": {
     "testEnvironment": "node"
   },
