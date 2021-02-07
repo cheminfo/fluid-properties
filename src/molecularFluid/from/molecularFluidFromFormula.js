@@ -1,4 +1,4 @@
-import moleculeProperties from '../../data/molecules.json';
+import moleculeProperties from '../../data/molecules';
 import { MolecularFluid } from '../molecularFluid.js';
 
 import { handleError } from './handleError.js';
