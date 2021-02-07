@@ -3,7 +3,21 @@ import { R } from '../data/constants.js';
 import { EOSParameters } from './eosParameters';
 import { getPhasefromPhi } from './phase.js';
 
-export function getEOS(molecularFluid, temperature, options = {}) {
+/**
+ * Based on a MolecularFluid, temperature, and pressure or volume and
+ * the choice of equation of state (EOS) return the thermodynamic properties
+ * of the system
+ *
+ * @export
+ * @param {MolecularFluid} molecularFluid instance of the MolecularFluid class
+ * @param {Number} temperature in Kelvin
+ * @param {Object} [options={}]
+ * @param {Number} options.pressure in bar
+ * @param {Number} options.volume in L
+ * @param {String} otpions.eos Type of the equation of states (EOS). Available options: pr (Peng-Robinson), vdw (Van der Waals), rk (Redlich–Kwong), rks (Redlich–Kwong-Soave). Defaults to pr.
+ * @returns {Object}
+ */
+export function getProperties(molecularFluid, temperature, options = {}) {
   let { pressure = 1, volume = null, eos = 'pr' } = options;
   validateInput(pressure, volume);
 

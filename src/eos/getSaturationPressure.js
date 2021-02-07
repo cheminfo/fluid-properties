@@ -1,14 +1,14 @@
 // Find fugacity(Gas)/fugacity(Liquid) = 1 by optimizing p
 import fmin from 'fmin';
 
-import { getEOS } from './getEOS.js';
+import { getProperties } from './getEOS.js';
 
 // curried loss function
 function loss(molecularFluid, temperature, options) {
   return (p) => {
     let { pressure = p[0], volume = null, eos = 'pr' } = options;
     const wrongLoss = 1000;
-    let res = getEOS(molecularFluid, temperature, {
+    let res = getProperties(molecularFluid, temperature, {
       pressure: pressure,
       volume: volume,
       eos: eos,
@@ -30,6 +30,20 @@ function loss(molecularFluid, temperature, options) {
 }
 
 // ToDo: what happens if we do not find anything?
+
+/**
+ * Find the saturation pressure of the system by finding the pressure
+ * for which the ratios of the fugacities is equal to one.
+ * Uses Nedler-Mead minimization which might not converge
+ *
+ * @export
+ * @param {MolecularFluid} molecularFluid instance of the MolecularFluid class
+ * @param {Number} temperature in K
+ * @param {Number} [startvalue=0.1] starting pressure (in bar) for the minimization
+ * @param {Options} [eosOptions={}] options that are passed to the getProperties function
+ * @param {Number} eosOptions.eos Type of the equation of states (EOS). Available options: pr (Peng-Robinson), vdw (Van der Waals), rk (Redlich–Kwong), rks (Redlich–Kwong-Soave). Defaults to pr.
+ * @returns {Object} fx and x
+ */
 export function findSaturationPressure(
   molecularFluid,
   temperature,

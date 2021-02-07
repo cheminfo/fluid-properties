@@ -5,7 +5,21 @@ import {
   getRKSParameters,
 } from './getEOSParameters.js';
 
+/**
+ * Stores the parametrization of EOS
+ *
+ * @export
+ * @class EOSParameters
+ */
 export class EOSParameters {
+  /**
+   *Creates an instance of EOSParameters.
+   * @param {MolecularFluid} molecularFluid instance of the MolecularFluid class
+   * @param {Object} [options={}]
+   * @param {Number} options.temperature temperature in K. Defaults to 298.
+   * @param {String} options.eos Type of the equation of states (EOS). Available options: pr (Peng-Robinson), vdw (Van der Waals), rk (Redlich–Kwong), rks (Redlich–Kwong-Soave). Defaults to pr.
+   * @memberof EOSParameters
+   */
   constructor(molecularFluid, options = {}) {
     let { temperature = 298, eos = 'pr' } = options;
     this.eos = eos;

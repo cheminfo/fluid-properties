@@ -14,10 +14,29 @@ Calculate thermodynamic properties of molecular fluids. Translation of [Daniele 
 ## Usage
 
 ```js
-import library from 'fluid-properties';
+import { MolecularFluid, getProperties } from 'fluid-properties';
 
-const result = library(args);
-// result is ...
+MolecularFluid.fromName('methane');
+const res = getProperties(methane, 290, { pressure: 100 });
+
+//    {
+//         temperature: 290,
+//         pressure: 100,
+//         phaseProperties: [
+//           {
+//             fugacityCoefficient: 0.8071942852537269,
+//             fugacity: 80.71942852537269,
+//             residualEnthalpy: -0.7670409991968398,
+//             residualEntropy: -0.5528501095136379,
+//             residualGibbsEnergy: -0.21419088968320188,
+//             compressibilityFactor: 0.8168115913954548,
+//             molarDensity: 5.077735676091721,
+//             density: 0.08145959489464415
+//           }
+//         ],
+//         zList: [ 0.8168115913954548 ],
+//         inPhase: 0
+//       }
 ```
 
 ## [API Documentation](https://cheminfo.github.io/fluid-properties/)
