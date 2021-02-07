@@ -1,6 +1,6 @@
 {
   "name": "fluid-properties",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Calculate thermodynamic properties of molecular fluids",
   "main": "lib/index.js",
   "module": "src/index.js",
