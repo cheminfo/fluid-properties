@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.1.1](https://www.github.com/cheminfo/fluid-properties/compare/v0.1.0...v0.1.1) (2021-02-07)
+
+
+### Bug Fixes
+
+* move molecules from json to js ([95a58b1](https://www.github.com/cheminfo/fluid-properties/commit/95a58b15a9393df921c63c131092134294c363fd))
+
 ## 0.1.0 (2021-02-07)
 
 
