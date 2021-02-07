@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset='utf-8'>
+  <title>fluid-properties 0.1.0 | Documentation</title>
+  <meta name='description' content='Calculate thermodynamic properties of molecular fluids'>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link href='assets/bass.css' rel='stylesheet'>
+  <link href='assets/style.css' rel='stylesheet'>
+  <link href='assets/github.css' rel='stylesheet'>
+  <link href='assets/split.css' rel='stylesheet'>
+</head>
+<body class='documentation m0'>
+    <div class='flex'>
+      <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
+        <div class='py1 px2'>
+          <h3 class='mb0 no-anchor'>fluid-properties</h3>
+          <div class='mb1'><code>0.1.0</code></div>
+          <input
+            placeholder='Filter'
+            id='filter-input'
+            class='col12 block input'
+            spellcheck='false'
+            autocapitalize='off'
+            autocorrect='off'
+            type='text' />
+          <div id='toc'>
+            <ul class='list-reset h5 py1-ul'>
+              
+                
+                <li><a
+                  href='#eosparameters'
+                  class="">
+                  EOSParameters
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getphase'
+                  class="">
+                  getPhase
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getphasefromphi'
+                  class="">
+                  getPhasefromPhi
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getproperties'
+                  class="">
+                  getProperties
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#molecularfluid'
+                  class="">
+                  MolecularFluid
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#solvez'
+                  class="">
+                  solveZ
+                  
+                </a>
+                
+                </li>
+              
+            </ul>
+          </div>
+          <div class='mt1 h6 quiet'>
+            <a href='https://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
+          </div>
+        </div>
+      </div>
+      <div id='split-right' class='relative overflow-auto height-viewport-100'>
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='eosparameters'>
+      EOSParameters
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cheminfo/fluid-properties/blob/a6b731a3f1af67f01436047c0ef7c5be590f409b/src/eos/eosParameters.js#L14-L61'>
+      <span>src/eos/eosParameters.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Stores the parametrization of EOS</p>
+
+    <div class='pre p1 fill-light mt0'>new EOSParameters()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getphase'>
+      getPhase
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cheminfo/fluid-properties/blob/a6b731a3f1af67f01436047c0ef7c5be590f409b/src/eos/phase.js#L12-L27'>
+      <span>src/eos/phase.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Based on comparing the parameters to the critical constants
+return which phase the system is in</p>
+
+    <div class='pre p1 fill-light mt0'>getPhase(molecularFluid: <a href="#molecularfluid">MolecularFluid</a>, temperature: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>, pressure: Numnber, volume: any, volumen: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>molecularFluid</span> <code class='quiet'>(<a href="#molecularfluid">MolecularFluid</a>)</code>
+	    instance of the MolecularFluid class
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>temperature</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
+	    in K
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>pressure</span> <code class='quiet'>(Numnber)</code>
+	    in bar
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>volume</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>volumen</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
+	    in L
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>:
+        "supercritial", "gas", or "liquid" or null
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getphasefromphi'>
+      getPhasefromPhi
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cheminfo/fluid-properties/blob/a6b731a3f1af67f01436047c0ef7c5be590f409b/src/eos/phase.js#L36-L46'>
+      <span>src/eos/phase.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Comparing an array of fugacities to find out in which
+state the system is</p>
+
+    <div class='pre p1 fill-light mt0'>getPhasefromPhi(phis: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>phis</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>>)</code>
+	    An array of fugacities
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></code>:
+        Index of the state the system is in
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getproperties'>
+      getProperties
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cheminfo/fluid-properties/blob/a6b731a3f1af67f01436047c0ef7c5be590f409b/src/eos/getEOS.js#L20-L58'>
+      <span>src/eos/getEOS.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Based on a MolecularFluid, temperature, and pressure or volume and
+the choice of equation of state (EOS) return the thermodynamic properties
+of the system</p>
+
+    <div class='pre p1 fill-light mt0'>getProperties(molecularFluid: <a href="#molecularfluid">MolecularFluid</a>, temperature: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>, options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>molecularFluid</span> <code class='quiet'>(<a href="#molecularfluid">MolecularFluid</a>)</code>
+	    instance of the MolecularFluid class
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>temperature</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
+	    in Kelvin
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+            = <code>{}</code>)</code>
+	    
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.pressure</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></code>
+  </td>
+  <td class='break-word'><span>in bar
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.volume</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></code>
+  </td>
+  <td class='break-word'><span>in L
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='molecularfluid'>
+      MolecularFluid
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cheminfo/fluid-properties/blob/a6b731a3f1af67f01436047c0ef7c5be590f409b/src/molecularFluid/molecularFluid.js#L10-L30'>
+      <span>src/molecularFluid/molecularFluid.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>This class stores properties of molecules</p>
+
+    <div class='pre p1 fill-light mt0'>new MolecularFluid()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='solvez'>
+      solveZ
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cheminfo/fluid-properties/blob/a6b731a3f1af67f01436047c0ef7c5be590f409b/src/eos/getEOS.js#L109-L118'>
+      <span>src/eos/getEOS.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Some background here <a href="https://pubs.acs.org/doi/pdf/10.1021/ie2023004">https://pubs.acs.org/doi/pdf/10.1021/ie2023004</a></p>
+
+    <div class='pre p1 fill-light mt0'>solveZ(eosParameters: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>eosParameters</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+      </div>
+    </div>
+  <script src='assets/anchor.js'></script>
+  <script src='assets/split.js'></script>
+  <script src='assets/site.js'></script>
+</body>
+</html>
